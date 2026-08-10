@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GhumauneyNepal helps travelers discover Nepal through destinations, trip planning, packages, hotels, and local travel guidance.">
+    <title>GhumauneyNepal | Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="is-loading">
+    <div class="page-loader" id="pageLoader" aria-hidden="true">
+        <div class="loader-card">
+            <img src="ll.png" alt="GhumauneyNepal logo">
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <header class="site-header">
+        <nav class="main-nav">
+            <a class="logo hero-animate" href="index.html">
+                <img src="ll.png" alt="GhumauneyNepal logo">
+            </a>
+
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="destinations.html">Destinations</a></li>
+                <li><a href="packages.html">Packages</a></li>
+                <li><a href="hotels.html">Hotels</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="hero-content">
+            <div class="hero-badge hero-animate hero-animate-badge">Trusted Nepal Travel Companion</div>
+            <h1 class="hero-animate hero-animate-title">Explore Nepal Your Way</h1>
+            <p class="hero-animate hero-animate-subtitle">Plan smarter. Travel safer. Discover more.</p>
+            <p class="hero-support hero-animate hero-animate-support">Discover Nepal's mountains, culture, wildlife, heritage, and unforgettable experiences — all in one place.</p>
+            <div class="hero-actions hero-animate hero-animate-actions">
+                <a href="#planner-section" class="btn btn-primary">Plan My Trip</a>
+                <a href="destinations.html" class="btn btn-secondary">Explore Destinations</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section planner-section reveal" id="planner-section">
+            <div class="section-heading">
+                <span>TRIP PLANNER</span>
+                <h2>Plan Your Perfect Nepal Trip</h2>
+                <p>Tell us what you need and start building your journey.</p>
+            </div>
+
+            <div class="planner-card reveal-card">
+                <form id="tripPlannerForm">
+                    <div class="form-grid">
+                        <label class="field">
+                            <span>Destination</span>
+                            <select id="destination" required>
+                                <option value="">Choose a destination</option>
+                                <option value="Kathmandu">Kathmandu</option>
+                                <option value="Pokhara">Pokhara</option>
+                                <option value="Chitwan">Chitwan</option>
+                                <option value="Mustang">Mustang</option>
+                                <option value="Everest">Everest</option>
+                                <option value="Lumbini">Lumbini</option>
+                                <option value="Ilam">Ilam</option>
+                                <option value="Any Destination">Any Destination</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Budget</span>
+                            <select id="budget" required>
+                                <option value="">Choose a budget</option>
+                                <option value="Budget">Budget</option>
+                                <option value="Standard">Standard</option>
+                                <option value="Premium">Premium</option>
+                                <option value="Luxury">Luxury</option>
+                            </select>
+                        </label>
+
+                        <label class="field">
+                            <span>Number of Travelers</span>
+                            <input type="number" id="travelers" min="1" max="20" placeholder="e.g. 4" required>
+                        </label>
+
+                        <label class="field">
+                            <span>Number of Days</span>
+                            <input type="number" id="days" min="1" max="30" placeholder="e.g. 7" required>
+                        </label>
+
+                        <label class="field full-width">
+                            <span>Travel Interest</span>
+                            <select id="interest" required>
+                                <option value="">Choose an interest</option>
+                                <option value="Adventure">Adventure</option>
+                                <option value="Nature">Nature</option>
+                                <option value="Culture">Culture</option>
+                                <option value="Wildlife">Wildlife</option>
+                                <option value="Spiritual">Spiritual</option>
+                                <option value="Relaxation">Relaxation</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Create My Trip</button>
+                    <div id="plannerResult" class="planner-result" role="status" aria-live="polite"></div>
+                </form>
+            </div>
+        </section>
+
+        <section class="section stats-section reveal">
+            <div class="stats-grid">
+                <article class="stats-card reveal-card">
+                    <strong>50</strong>
+                    <span>Curated destinations</span>
+                </article>
+                <article class="stats-card reveal-card">
+                    <strong>7</strong>
+                    <span>Provinces explored</span>
+                </article>
+                <article class="stats-card reveal-card">
+                    <strong>100%</strong>
+                    <span>Traveler-ready planning</span>
+                </article>
+            </div>
+        </section>
+
+        <section class="section featured-destinations reveal">
+            <div class="section-heading">
+                <span>FEATURED DESTINATIONS</span>
+                <h2>Handpicked places to discover</h2>
+                <p>Browse a curated preview of Nepal's most inspiring destinations.</p>
+            </div>
+
+            <div class="card-grid featured-grid" id="featuredDestinations"></div>
+        </section>
+
+        <section class="section provinces-section reveal">
+            <div class="section-heading">
+                <span>7 PROVINCES</span>
+                <h2>Explore Nepal from east to west</h2>
+                <p>Every province contributes its own landscapes, stories, and experiences.</p>
+            </div>
+
+            <div class="province-grid">
+                <article class="province-card reveal-card">
+                    <h3>Koshi Province</h3>
+                    <p>Tea gardens, mountainous routes, and dynamic eastern culture.</p>
+                </article>
+                <article class="province-card reveal-card">
+                    <h3>Madhesh Province</h3>
+                    <p>Historic towns, spiritual centers, and rich cultural traditions.</p>
+                </article>
+                <article class="province-card reveal-card">
+                    <h3>Bagmati Province</h3>
+                    <p>Heritage cities, temple routes, and scenic highlands.</p>
+                </article>
+                <article class="province-card reveal-card">
+                    <h3>Gandaki Province</h3>
+                    <p>Lake views, adventure trails, and dramatic Himalayan scenery.</p>
+                </article>
+                <article class="province-card reveal-card">
+                    <h3>Lumbini Province</h3>
+                    <p>Peaceful pilgrimage landscapes and ancient heritage sites.</p>
+                </article>
+                <article class="province-card reveal-card">
+                    <h3>Karnali Province</h3>
+                    <p>Remote lakes, high valleys, and unforgettable wilderness.</p>
+                </article>
+                <article class="province-card reveal-card">
+                    <h3>Sudurpashchim Province</h3>
+                    <p>Open skies, mountain passes, and wide western landscapes.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section culture-section reveal">
+            <div class="section-heading">
+                <span>NEPAL IN EVERY SEASON</span>
+                <h2>Curated Experiences for Every Kind of Traveler</h2>
+                <p>From heritage walks to high-altitude adventure, GhumauneyNepal brings together inspiring routes and practical guidance.</p>
+            </div>
+
+            <div class="culture-grid">
+                <article class="culture-card reveal-card">
+                    <h3>Heritage & Festivals</h3>
+                    <p>Step into living traditions with temple circuits, local festivals, and UNESCO-listed landmarks.</p>
+                </article>
+                <article class="culture-card reveal-card">
+                    <h3>Adventure & Trekking</h3>
+                    <p>Find routes ranging from beginner-friendly hikes to challenging Himalayan expeditions.</p>
+                </article>
+                <article class="culture-card reveal-card">
+                    <h3>Wellness & Retreats</h3>
+                    <p>Recharge with lakeside stays, yoga spaces, scenic resorts, and restorative escapes.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section why-section reveal">
+            <div class="section-heading">
+                <span>WHY GHUMAUNEYNEPAL</span>
+                <h2>Why Choose GhumauneyNepal?</h2>
+                <p>Everything you need to plan your Nepal adventure in one practical place.</p>
+            </div>
+
+            <div class="card-grid feature-grid">
+                <article class="feature-card reveal-card">
+                    <h3>Smart Trip Planning</h3>
+                    <p>Plan your journey according to your budget, time, interests and group size.</p>
+                </article>
+                <article class="feature-card reveal-card">
+                    <h3>Travel for Every Budget</h3>
+                    <p>Find travel experiences ranging from budget-friendly to premium.</p>
+                </article>
+                <article class="feature-card reveal-card">
+                    <h3>Safety First</h3>
+                    <p>Travel information designed to help you make safer and more informed decisions.</p>
+                </article>
+                <article class="feature-card reveal-card">
+                    <h3>One Platform</h3>
+                    <p>Destinations, packages, hotels and trip planning in one place.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section packages-section reveal">
+            <div class="section-heading">
+                <span>FEATURED PACKAGES</span>
+                <h2>Featured Nepal Packages</h2>
+                <p>Curated experiences for unforgettable Nepal trips.</p>
+            </div>
+
+            <div class="card-grid package-grid">
+                <article class="package-card reveal-card">
+                    <div class="card-image"></div>
+                    <div class="card-content">
+                        <h3>Pokhara Escape</h3>
+                        <p class="duration">3 Days / 2 Nights</p>
+                        <p>A peaceful mix of lakeside views, nature, and light adventure.</p>
+                        <p class="price">Starting from <strong>USD 220</strong></p>
+                        <a href="packages.html" class="btn btn-small">View Package</a>
+                    </div>
+                </article>
+
+                <article class="package-card reveal-card">
+                    <div class="card-image"></div>
+                    <div class="card-content">
+                        <h3>Chitwan Adventure</h3>
+                        <p class="duration">3 Days / 2 Nights</p>
+                        <p>Wildlife experiences, cultural encounters, and jungle stays.</p>
+                        <p class="price">Starting from <strong>USD 260</strong></p>
+                        <a href="packages.html" class="btn btn-small">View Package</a>
+                    </div>
+                </article>
+
+                <article class="package-card reveal-card">
+                    <div class="card-image"></div>
+                    <div class="card-content">
+                        <h3>Mustang Explorer</h3>
+                        <p class="duration">5 Days / 4 Nights</p>
+                        <p>Remote landscapes, heritage sites, and unforgettable Himalayan scenery.</p>
+                        <p class="price">Starting from <strong>USD 420</strong></p>
+                        <a href="packages.html" class="btn btn-small">View Package</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section safety-section reveal">
+            <div class="section-heading">
+                <span>TRAVEL WITH CONFIDENCE</span>
+                <h2>Travel With Confidence</h2>
+                <p>Built to help travelers prepare with clarity and peace of mind.</p>
+            </div>
+
+            <div class="safety-grid">
+                <div class="safety-item reveal-card">Safety Information</div>
+                <div class="safety-item reveal-card">Budget Planning</div>
+                <div class="safety-item reveal-card">Accessible Travel Information</div>
+                <div class="safety-item reveal-card">Emergency Information</div>
+                <div class="safety-item reveal-card">Verified Travel Information</div>
+            </div>
+        </section>
+
+        <section class="section testimonials-section reveal">
+            <div class="section-heading">
+                <span>TESTIMONIALS</span>
+                <h2>What Travelers Say</h2>
+                <p>Sample feedback from travelers who use the platform to explore Nepal.</p>
+            </div>
+
+            <div class="card-grid testimonial-grid">
+                <article class="testimonial-card reveal-card">
+                    <p>“The planner helped me shape a simple and balanced Nepal trip in just a few minutes.”</p>
+                    <strong>— Arjun, Kathmandu</strong>
+                </article>
+                <article class="testimonial-card reveal-card">
+                    <p>“I loved the way the information was organized for different travel interests.”</p>
+                    <strong>— Riya, Pokhara</strong>
+                </article>
+                <article class="testimonial-card reveal-card">
+                    <p>“It made it easier to compare destinations and explore ideas without feeling overwhelmed.”</p>
+                    <strong>— Sagar, Chitwan</strong>
+                </article>
+            </div>
+        </section>
+
+        <section class="section founder-section reveal">
+            <div class="section-heading">
+                <span>FOUNDER & CREATOR</span>
+                <h2>Meet the mind behind GhumauneyNepal</h2>
+                <p>A thoughtful travel platform shaped around practical guidance and meaningful Nepal experiences.</p>
+            </div>
+
+            <div class="founder-card reveal-card">
+                <div class="founder-badge">Founder & Creator</div>
+                <h3>Bhuwan Prasad Joshi</h3>
+                <p>Bhuwan Prasad Joshi is the founder and creator of GhumauneyNepal. He brings a grounded perspective to travel planning, shaped by a belief in practical guidance, local insight, and memorable journeys across Nepal.</p>
+            </div>
+        </section>
+
+        <section class="section cta-section reveal">
+            <h2>Your Nepal Adventure Starts Here</h2>
+            <p>One platform. Every journey. Every budget.</p>
+            <a href="#planner-section" class="btn btn-primary">Plan My Trip</a>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-brand">
+            <h3>GhumauneyNepal</h3>
+            <p>One Platform. Every Journey. Every Budget.</p>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="destinations.html">Destinations</a>
+            <a href="packages.html">Packages</a>
+            <a href="hotels.html">Hotels</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-legal">
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms-conditions.html">Terms & Conditions</a>
+        </div>
+    </footer>
+
+    <script src="data/destinations.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

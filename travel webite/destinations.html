@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinations | GhumauneyNepal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="subpage-header">
+        <nav class="main-nav">
+            <a class="logo" href="index.html">
+                <img src="ll.png" alt="GhumauneyNepal logo">
+            </a>
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="destinations.html" class="active">Destinations</a></li>
+                <li><a href="packages.html">Packages</a></li>
+                <li><a href="hotels.html">Hotels</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="subpage-hero">
+            <span>EXPLORE NEPAL</span>
+            <h1>Discover Nepal</h1>
+            <p>Browse destinations across Nepal and find the right fit for your travel style.</p>
+        </div>
+    </header>
+
+    <main class="page-shell">
+        <section class="destinations-section" id="destinations">
+            <div class="section-heading">
+                <span>DESTINATION EXPLORER</span>
+                <h2>Filter by province, interest, and budget</h2>
+                <p>Search places that match your pace, interests, and travel budget.</p>
+            </div>
+
+            <div class="explorer-toolbar">
+                <div class="toolbar-group">
+                    <input type="search" id="searchInput" class="filter-input" placeholder="Search destinations...">
+                </div>
+                <div class="toolbar-group toolbar-inline">
+                    <select id="categoryFilter" class="filter-input">
+                        <option value="all">All interests</option>
+                        <option value="Adventure">Adventure</option>
+                        <option value="Culture">Culture</option>
+                        <option value="Nature">Nature</option>
+                        <option value="Wildlife">Wildlife</option>
+                        <option value="Spiritual">Spiritual</option>
+                    </select>
+                    <select id="budgetFilter" class="filter-input">
+                        <option value="all">All budgets</option>
+                        <option value="Budget">Budget</option>
+                        <option value="Mid-range">Mid-range</option>
+                        <option value="Premium">Premium</option>
+                    </select>
+                    <button class="wishlist-chip" id="wishlistSummary" type="button">Wishlist (0)</button>
+                </div>
+            </div>
+
+            <div class="province-buttons">
+                <button class="province-btn active" data-province="all">All</button>
+                <button class="province-btn" data-province="Koshi">Koshi</button>
+                <button class="province-btn" data-province="Madhesh">Madhesh</button>
+                <button class="province-btn" data-province="Bagmati">Bagmati</button>
+                <button class="province-btn" data-province="Gandaki">Gandaki</button>
+                <button class="province-btn" data-province="Lumbini">Lumbini</button>
+                <button class="province-btn" data-province="Karnali">Karnali</button>
+                <button class="province-btn" data-province="Sudurpashchim">Sudurpashchim</button>
+            </div>
+
+            <div class="destination-grid" id="destinationContainer"></div>
+        </section>
+    </main>
+
+    <div class="modal-backdrop" id="destinationModal" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+            <button class="modal-close" type="button" id="closeModal">×</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-brand">
+            <h3>GhumauneyNepal</h3>
+            <p>One Platform. Every Journey. Every Budget.</p>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="destinations.html">Destinations</a>
+            <a href="packages.html">Packages</a>
+            <a href="hotels.html">Hotels</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-legal">
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms-conditions.html">Terms & Conditions</a>
+        </div>
+    </footer>
+
+    <script src="data/destinations.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

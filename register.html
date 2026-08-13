@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | GhumauneyNepal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <nav class="main-nav">
+
+        <a class="logo" href="index.html">
+            <img src="ll.png" alt="GhumauneyNepal logo">
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="destinations.html">Destinations</a></li>
+            <li><a href="packages.html">Packages</a></li>
+            <li><a href="hotels.html">Hotels</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+
+    </nav>
+
+</header>
+
+<main>
+
+<section class="section">
+
+    <div class="section-heading">
+        <span>JOIN GHUMAUNEYNEPAL</span>
+        <h1>Create Your Account</h1>
+        <p>Create an account and start planning your Nepal journey.</p>
+    </div>
+
+    <div class="planner-card" style="max-width: 500px; margin: 0 auto;">
+
+        <form id="registerForm">
+
+            <label class="field">
+                <span>Name</span>
+                <input
+                    type="text"
+                    id="registerName"
+                    required
+                    placeholder="Enter your name"
+                >
+            </label>
+
+            <br>
+
+            <label class="field">
+                <span>Email</span>
+                <input
+                    type="email"
+                    id="registerEmail"
+                    required
+                    placeholder="Enter your email"
+                >
+            </label>
+
+            <br>
+
+            <label class="field">
+                <span>Password</span>
+                <input
+                    type="password"
+                    id="registerPassword"
+                    minlength="6"
+                    required
+                    placeholder="At least 6 characters"
+                >
+            </label>
+
+            <button
+                type="submit"
+                class="btn"
+                style="margin-top: 20px;"
+            >
+                Create Account
+            </button>
+
+            <div
+                id="registerMessage"
+                role="status"
+                aria-live="polite"
+                style="margin-top: 15px;"
+            ></div>
+
+        </form>
+
+        <p style="margin-top: 20px;">
+            Already have an account?
+            <a href="login.html">Login here</a>
+        </p>
+
+    </div>
+
+</section>
+
+</main>
+
+<footer class="site-footer">
+
+    <div class="footer-brand">
+        <h3>GhumauneyNepal</h3>
+        <p>One Platform. Every Journey. Every Budget.</p>
+    </div>
+
+</footer>
+
+<script>
+
+const registerForm = document.getElementById("registerForm");
+const registerMessage = document.getElementById("registerMessage");
+
+registerForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const name = document.getElementById("registerName").value;
+    const email = document.getElementById("registerEmail").value;
+    const password = document.getElementById("registerPassword").value;
+
+    registerMessage.textContent = "Creating account...";
+
+    try {
+
+        const response = await fetch(
+            "Backend/auth/register.php",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+
+                body: new URLSearchParams({
+                    name: name,
+                    email: email,
+                    password: password
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (data.success) {
+
+            registerMessage.textContent =
+                "Registration successful! Redirecting to login...";
+
+            setTimeout(function() {
+                window.location.href = "login.html";
+            }, 1000);
+
+        } else {
+
+            registerMessage.textContent = data.message;
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        registerMessage.textContent =
+            "Unable to connect to the server.";
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

@@ -3,27 +3,22 @@
 require_once __DIR__ . "/../config/db.php";
 require_once __DIR__ . "/../includes/functions.php";
 
-$user_id = require_login();
+/* Only admin can delete destinations */
+require_admin();
 
-$wishlist_id = (int) get_value("wishlist_id");
+$id = (int) get_value("id");
 
-if ($wishlist_id <= 0) {
-    send_response(false, "Valid wishlist ID is required.");
+if ($id <= 0) {
+    send_response(false, "Valid destination ID is required.");
 }
 
 $stmt = mysqli_prepare(
     $conn,
-    "DELETE FROM wishlist
-     WHERE id = ?
-     AND user_id = ?"
+    "DELETE FROM destinations
+     WHERE id = ?"
 );
 
-mysqli_stmt_bind_param(
-    $stmt,
-    "ii",
-    $wishlist_id,
-    $user_id
-);
+mysqli_stmt_bind_param($stmt, "i", $id);
 
 if (!mysqli_stmt_execute($stmt)) {
 
@@ -31,7 +26,7 @@ if (!mysqli_stmt_execute($stmt)) {
 
     send_response(
         false,
-        "Could not remove destination from wishlist."
+        "Failed to delete destination."
     );
 }
 
@@ -41,7 +36,7 @@ if (mysqli_stmt_affected_rows($stmt) === 0) {
 
     send_response(
         false,
-        "Wishlist item not found."
+        "Destination not found."
     );
 }
 
@@ -49,5 +44,5 @@ mysqli_stmt_close($stmt);
 
 send_response(
     true,
-    "Destination removed from wishlist."
+    "Destination deleted successfully."
 );

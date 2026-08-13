@@ -2,11 +2,11 @@ const destinations = window.destinationData || [];
 
 const fallbackImage = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
     <svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
-        <rect width="800" height="500" fill="#f8f2e8"/>
-        <rect x="30" y="30" width="740" height="440" rx="28" fill="#fff7ea" stroke="#f2b55c" stroke-width="4"/>
-        <path d="M120 360 L280 220 L360 290 L470 170 L680 360" fill="none" stroke="#f2b55c" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="240" cy="190" r="38" fill="#f2b55c"/>
-        <text x="400" y="420" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" fill="#8c5d0f">Image coming soon</text>
+        <rect width="800" height="500" fill="#0e1b2f"/>
+        <rect x="30" y="30" width="740" height="440" rx="28" fill="#122036" stroke="#f59e0b" stroke-width="3"/>
+        <path d="M120 360 L280 220 L360 290 L470 170 L680 360" fill="none" stroke="#f59e0b" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="240" cy="190" r="34" fill="#f59e0b"/>
+        <text x="400" y="420" text-anchor="middle" font-family="'Outfit', sans-serif" font-size="28" font-weight="bold" fill="#f8fafc">GhumauneyNepal Destination</text>
     </svg>
 `);
 
@@ -16,6 +16,8 @@ function getImageUrl(path) {
 
 const plannerForm = document.getElementById("tripPlannerForm");
 const plannerResult = document.getElementById("plannerResult");
+const contactForm = document.getElementById("contactForm");
+const contactResult = document.getElementById("contactResult");
 const navToggle = document.querySelector(".nav-toggle");
 const mainNav = document.querySelector(".main-nav");
 const pageLoader = document.getElementById("pageLoader");
@@ -31,22 +33,18 @@ let currentBudget = "all";
 let currentSearch = "";
 
 function initLoader() {
-    if (!pageLoader) {
-        return;
-    }
+    if (!pageLoader) return;
 
     window.addEventListener("load", () => {
         window.setTimeout(() => {
             pageLoader.classList.add("is-hidden");
             document.body.classList.remove("is-loading");
-        }, 450);
+        }, 350);
     });
 }
 
 function initPlanner() {
-    if (!plannerForm || !plannerResult) {
-        return;
-    }
+    if (!plannerForm || !plannerResult) return;
 
     plannerForm.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -66,7 +64,20 @@ function initPlanner() {
         }
 
         plannerResult.className = "planner-result success is-visible";
-        plannerResult.textContent = `Your ${budget.toLowerCase()} trip to ${destination} for ${travelers} traveler(s) over ${days} day(s) focused on ${interest.toLowerCase()} is ready to explore.`;
+        plannerResult.textContent = `Your ${budget.toLowerCase()} trip to ${destination} for ${travelers} traveler(s) over ${days} day(s) focused on ${interest.toLowerCase()} is ready to explore!`;
+    });
+}
+
+function initContactForm() {
+    if (!contactForm || !contactResult) return;
+
+    contactForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const name = document.getElementById("contactName").value;
+        
+        contactResult.className = "planner-result success is-visible";
+        contactResult.textContent = `Thank you, ${name}! Your inquiry has been received. We will get back to you shortly.`;
+        contactForm.reset();
     });
 }
 
@@ -88,9 +99,7 @@ function initNavigation() {
     document.querySelectorAll('a[href^="#"]').forEach((link) => {
         link.addEventListener("click", (event) => {
             const targetId = link.getAttribute("href");
-            if (!targetId || targetId === "#") {
-                return;
-            }
+            if (!targetId || targetId === "#") return;
 
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
@@ -103,10 +112,7 @@ function initNavigation() {
 
 function initReveal() {
     const revealItems = document.querySelectorAll(".reveal, .reveal-card");
-
-    if (!revealItems.length) {
-        return;
-    }
+    if (!revealItems.length) return;
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
@@ -115,18 +121,39 @@ function initReveal() {
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.16 });
+    }, { threshold: 0.12 });
 
     revealItems.forEach((item, index) => {
-        item.style.transitionDelay = `${Math.min(index * 0.06, 0.3)}s`;
+        item.style.transitionDelay = `${Math.min(index * 0.05, 0.25)}s`;
         observer.observe(item);
     });
 }
 
+/* Subtle 3D Mouse Micro-Tilt Effect */
+function init3DTilt() {
+    const tiltCards = document.querySelectorAll(".destination-card, .content-card, .package-card, .feature-card, .culture-card, .stats-card, .province-card, .founder-card, .hotel-card");
+
+    tiltCards.forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = ((y - centerY) / centerY) * -5;
+            const rotateY = ((x - centerX) / centerX) * 5;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-8px) translateZ(12px)`;
+        });
+
+        card.addEventListener("mouseleave", () => {
+            card.style.transform = "";
+        });
+    });
+}
+
 function openModal(destination) {
-    if (!destinationModal || !modalContent) {
-        return;
-    }
+    if (!destinationModal || !modalContent) return;
 
     const modalImageUrl = getImageUrl(destination.image);
 
@@ -135,31 +162,30 @@ function openModal(destination) {
             <img class="modal-image" src="${modalImageUrl}" alt="${destination.name}" loading="lazy">
             <div>
                 <span class="destination-province">${destination.province}</span>
-                <h2 id="modalTitle">${destination.name}</h2>
-                <p>${destination.description}</p>
+                <h2 id="modalTitle" style="margin-top: 10px; font-size: 1.8rem; color: var(--text-main);">${destination.name}</h2>
+                <p style="margin: 12px 0; color: var(--text-muted);">${destination.description}</p>
                 <div class="destination-meta">
                     <span class="destination-badge">${destination.category}</span>
                     <span class="destination-badge">${destination.budget}</span>
                 </div>
                 ${destination.district ? `<p class="modal-meta"><strong>District:</strong> ${destination.district}</p>` : ""}
-                <p class="modal-meta"><strong>Best time:</strong> ${destination.bestTime}</p>
-                ${destination.locationNote ? `<p class="modal-meta note">${destination.locationNote}</p>` : ""}
+                <p class="modal-meta"><strong>Best time to visit:</strong> ${destination.bestTime}</p>
+                ${destination.duration ? `<p class="modal-meta"><strong>Suggested duration:</strong> ${destination.duration}</p>` : ""}
+                ${destination.locationNote ? `<p class="modal-meta" style="color: var(--accent-amber); font-style: italic;">${destination.locationNote}</p>` : ""}
                 <ul class="timeline-list">
                     ${destination.highlights.map((item) => `<li>${item}</li>`).join("")}
                 </ul>
+                <a href="contact.html" class="btn btn-small" style="margin-top: 20px;">Plan Visit Here</a>
             </div>
         </div>
     `;
 
-    // Attach error handler to modal image
     const modalImg = modalContent.querySelector('.modal-image');
     if (modalImg) {
         modalImg.addEventListener('error', () => {
-            console.warn("Destination image failed:", destination.name, destination.image);
             modalImg.onerror = null;
             modalImg.src = fallbackImage;
             modalImg.alt = `${destination.name} image unavailable`;
-            modalImg.classList.add('image-fallback');
         });
     }
 
@@ -169,9 +195,7 @@ function openModal(destination) {
 }
 
 function closeModal() {
-    if (!destinationModal) {
-        return;
-    }
+    if (!destinationModal) return;
 
     destinationModal.classList.remove("is-open");
     destinationModal.setAttribute("aria-hidden", "true");
@@ -185,16 +209,16 @@ function updateWishlistSummary() {
 }
 
 function renderFeaturedDestinations() {
-    if (!featuredDestinationsContainer) {
-        return;
-    }
+    if (!featuredDestinationsContainer) return;
 
     const featured = destinations.slice(0, 6);
     featuredDestinationsContainer.innerHTML = featured.map((destination) => {
         const imageUrl = getImageUrl(destination.image);
         return `
         <article class="content-card reveal-card">
-            <img class="card-image" src="${imageUrl}" alt="${destination.name}" loading="lazy">
+            <div class="card-image-wrapper">
+                <img class="card-image" src="${imageUrl}" alt="${destination.name}" loading="lazy">
+            </div>
             <div class="card-content">
                 <div class="destination-meta">
                     <span class="destination-badge">${destination.category}</span>
@@ -208,19 +232,15 @@ function renderFeaturedDestinations() {
     `;
     }).join("");
 
-    // Attach error handlers to featured images
     const featuredImages = featuredDestinationsContainer.querySelectorAll('img.card-image');
     featuredImages.forEach(img => {
         img.addEventListener('error', () => {
-            const alt = img.getAttribute('alt') || 'unknown';
-            const dest = destinations.find(d => d.name === alt);
-            console.warn("Destination image failed:", dest ? dest.name : alt, img.src);
             img.onerror = null;
             img.src = fallbackImage;
-            img.alt = `${alt} image unavailable`;
-            img.classList.add('image-fallback');
         });
     });
+
+    init3DTilt();
 }
 
 function initDestinations() {
@@ -229,9 +249,7 @@ function initDestinations() {
     const categoryFilter = document.getElementById("categoryFilter");
     const budgetFilter = document.getElementById("budgetFilter");
 
-    if (!container) {
-        return;
-    }
+    if (!container) return;
 
     function filterDestinations() {
         return destinations.filter((destination) => {
@@ -248,7 +266,7 @@ function initDestinations() {
         container.innerHTML = "";
 
         if (!list.length) {
-            container.innerHTML = '<div class="planner-card"><p>No destinations match the current filters.</p></div>';
+            container.innerHTML = '<div class="planner-card" style="grid-column: 1/-1; text-align: center;"><p>No destinations match the current filters.</p></div>';
             return;
         }
 
@@ -259,7 +277,9 @@ function initDestinations() {
             const inWishlist = wishlist.includes(destination.name);
             card.innerHTML = `
                 <button class="wishlist-btn ${inWishlist ? "is-active" : ""}" type="button" data-name="${destination.name}" aria-label="Save to wishlist">♡</button>
-                <img class="destination-image" src="${getImageUrl(destination.image)}" alt="${destination.name}" loading="lazy">
+                <div class="card-image-wrapper">
+                    <img class="destination-image" src="${getImageUrl(destination.image)}" alt="${destination.name}" loading="lazy">
+                </div>
 
                 <div class="destination-info">
                     <div class="destination-meta">
@@ -277,11 +297,8 @@ function initDestinations() {
 
             const image = card.querySelector("img");
             image.addEventListener("error", () => {
-                console.warn("Destination image failed:", destination.name, destination.image);
                 image.onerror = null;
                 image.src = fallbackImage;
-                image.alt = `${destination.name} image unavailable`;
-                image.classList.add("image-fallback");
             });
 
             card.querySelector(".wishlist-btn").addEventListener("click", (event) => {
@@ -310,6 +327,8 @@ function initDestinations() {
 
             container.appendChild(card);
         });
+
+        init3DTilt();
     }
 
     function renderDestinations() {
@@ -352,7 +371,7 @@ function initDestinations() {
     if (wishlistSummary) {
         wishlistSummary.addEventListener("click", () => {
             const wishlistList = wishlist.length ? wishlist.join(", ") : "No destinations saved yet";
-            alert(`Wishlist: ${wishlistList}`);
+            alert(`Saved Wishlist (${wishlist.length}):\n\n${wishlistList}`);
         });
     }
 
@@ -379,7 +398,9 @@ function initDestinations() {
 
 initLoader();
 initPlanner();
+initContactForm();
 initNavigation();
 initReveal();
 renderFeaturedDestinations();
 initDestinations();
+init3DTilt();

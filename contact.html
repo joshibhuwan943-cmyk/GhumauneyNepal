@@ -37,31 +37,35 @@
     <main class="page-shell">
         <section class="section">
             <div class="contact-grid">
-                <article class="contact-card">
+                <article class="contact-card reveal-card">
                     <h3>Get in touch</h3>
                     <p>Call, email, or visit for destination recommendations and itinerary planning.</p>
                     <ul class="timeline-list">
-                        <li>Email: hello@ghumauneynepal.com</li>
-                        <li>Phone: +977-9800000000</li>
-                        <li>Location: Kathmandu, Nepal</li>
+                        <li><strong>Email:</strong> hello@ghumauneynepal.com</li>
+                        <li><strong>Phone:</strong> +977-9800000000</li>
+                        <li><strong>Location:</strong> Kathmandu, Nepal</li>
                     </ul>
                 </article>
-                <article class="contact-card">
+
+                <article class="contact-card reveal-card">
                     <h3>Start a conversation</h3>
-                    <form>
-                        <label class="field">
-                            <span>Name</span>
-                            <input type="text" placeholder="Your name">
-                        </label>
-                        <label class="field">
-                            <span>Email</span>
-                            <input type="email" placeholder="your@email.com">
-                        </label>
-                        <label class="field">
-                            <span>How can we help?</span>
-                            <textarea rows="4" placeholder="Tell us about your plans"></textarea>
-                        </label>
-                        <button type="button" class="btn btn-primary">Send Inquiry</button>
+                    <form id="contactForm">
+                        <div style="display: flex; flex-direction: column; gap: 16px;">
+                            <label class="field">
+                                <span>Name</span>
+                                <input type="text" id="contactName" placeholder="Your name" required>
+                            </label>
+                            <label class="field">
+                                <span>Email</span>
+                                <input type="email" id="contactEmail" placeholder="your@email.com" required>
+                            </label>
+                            <label class="field">
+                                <span>How can we help?</span>
+                                <textarea id="contactMessage" rows="4" placeholder="Tell us about your plans" required></textarea>
+                            </label>
+                            <button type="submit" class="btn" style="align-self: start;">Send Inquiry</button>
+                            <div id="contactResult" class="planner-result" role="status" aria-live="polite"></div>
+                        </div>
                     </form>
                 </article>
             </div>

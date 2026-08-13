@@ -8,11 +8,16 @@
 </head>
 <body>
     <header class="subpage-header">
-        <nav>
-            <div class="logo">
+        <nav class="main-nav">
+            <a class="logo" href="index.html">
                 <img src="ll.png" alt="GhumauneyNepal logo">
-            </div>
-            <ul>
+            </a>
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="destinations.html">Destinations</a></li>
                 <li><a href="packages.html">Packages</a></li>
@@ -21,12 +26,26 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
+
+        <div class="subpage-hero">
+            <span>LEGAL</span>
+            <h1>Terms & Conditions</h1>
+            <p>Guidelines and terms governing your use of GhumauneyNepal travel platform.</p>
+        </div>
     </header>
 
-    <main>
-        <section class="page-section">
-            <h2>Terms & Conditions</h2>
-            <p>This page is a placeholder for the terms and conditions content.</p>
+    <main class="page-shell">
+        <section class="section">
+            <div class="contact-card reveal-card" style="max-width: 860px; margin: 0 auto;">
+                <h2 style="margin-bottom: 16px; color: var(--text-main);">Terms of Service</h2>
+                <p>By accessing GhumauneyNepal, you agree to comply with our platform terms. GhumauneyNepal provides travel recommendations, destination guides, and planning assistance for exploratory purposes across Nepal.</p>
+                
+                <h3 style="margin: 24px 0 10px; color: var(--text-main);">Travel Guidance & Content</h3>
+                <p>While we make every effort to maintain accurate destination details, weather information, and route advice, travelers are encouraged to verify official local guidelines and weather conditions prior to departure.</p>
+                
+                <h3 style="margin: 24px 0 10px; color: var(--text-main);">Intellectual Property</h3>
+                <p>All brand graphics, curated text content, and platform visual designs are protected property of GhumauneyNepal and founder Bhuwan Prasad Joshi.</p>
+            </div>
         </section>
     </main>
 
@@ -48,5 +67,7 @@
             <a href="terms-conditions.html">Terms & Conditions</a>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

@@ -8,11 +8,16 @@
 </head>
 <body>
     <header class="subpage-header">
-        <nav>
-            <div class="logo">
+        <nav class="main-nav">
+            <a class="logo" href="index.html">
                 <img src="ll.png" alt="GhumauneyNepal logo">
-            </div>
-            <ul>
+            </a>
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="destinations.html">Destinations</a></li>
                 <li><a href="packages.html">Packages</a></li>
@@ -21,12 +26,26 @@
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
+
+        <div class="subpage-hero">
+            <span>LEGAL</span>
+            <h1>Privacy Policy</h1>
+            <p>Learn how GhumauneyNepal handles traveler privacy and information protection.</p>
+        </div>
     </header>
 
-    <main>
-        <section class="page-section">
-            <h2>Privacy Policy</h2>
-            <p>This page is a placeholder for the privacy policy content.</p>
+    <main class="page-shell">
+        <section class="section">
+            <div class="contact-card reveal-card" style="max-width: 860px; margin: 0 auto;">
+                <h2 style="margin-bottom: 16px; color: var(--text-main);">Privacy & Data Policy</h2>
+                <p>GhumauneyNepal is dedicated to safeguarding your personal information. We gather basic information necessary for itinerary planning, trip customization, and inquiry responses.</p>
+                
+                <h3 style="margin: 24px 0 10px; color: var(--text-main);">Information We Collect</h3>
+                <p>We may collect information you provide directly through our trip planner and contact forms, including your name, email address, travel preferences, and itinerary requests.</p>
+                
+                <h3 style="margin: 24px 0 10px; color: var(--text-main);">How Information is Used</h3>
+                <p>Your details are used solely to generate travel recommendations, respond to your inquiries, and continuously improve our destination guidance across Nepal.</p>
+            </div>
         </section>
     </main>
 
@@ -48,5 +67,7 @@
             <a href="terms-conditions.html">Terms & Conditions</a>
         </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
